@@ -1,78 +1,59 @@
-const Hello = ({name, age}) => {
-  // SAME AS:
-  // const { name, age } = props
-  // SAME AS:
-  // const name = props.name
-  // const age = props.age
+import { useState } from 'react'
 
-  const bornYear = () => new Date().getFullYear() - age
-  // SAME AS:
-  // const bornYear = () => {
-  //   const yearNow = new Date().getFullYear()
-  //   return yearNow - age
-  // }
 
-  return (
-    <div>
-      <p>Hello {age}, you are {age} years old</p>
-      <p>So you were probably born in {bornYear()} </p>
-    </div>
-  )
-}
+const Display = ({counter}) => <div>{counter}</div>
+//SAME AS
+// const Display = (props) => {
+//   return (
+//     <div>{props.counter}</div>
+//   )
+// }
 
-const Footer = () => {
-  return (
-    <div>
-      test app created by <a href='https//github.com/Complex1t'>Complex1t</a>
-    </div>
-  )
-}
+const Button = ({onClick, text}) => <button onClick={onClick}>{text}</button>
+//SAME AS
+// const Button = (props) => {
+//   return (
+//     <button onClick={props.onClick}>
+//       {props.text}
+//     </button>
+//   )
+// }
 
 
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+
+  const [ counter, setCounter ] = useState(0) //adds state to this component and renders it initialized with 0
+  console.log('rendering with counter value', counter)
+
+  const increaseByOne = () => {
+    console.log('increasing, value before', counter)
+    setCounter(counter + 1)
+  }
+  const decreaseByOne = () => {
+    console.log('decreasing, value before', counter)
+    setCounter(counter - 1)
+  }
+    const setToZero = () => {
+    console.log('resetting to zero, value before', counter)
+    setCounter(0)
+  }
+
+
+  // setTimeout(
+  //   () => setCounter(counter + 1),
+  //   1000
+  // )
+
+  // console.log('rendering...', counter)
 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
-      <Hello name={name} age={age} />
+      <Display counter={counter}/>
+      <Button onClick={increaseByOne} text='plus'></Button>
+      <Button onClick={setToZero} text='zero'></Button>
+      <Button onClick={decreaseByOne} text='minus'></Button>
     </div>
   )
 }
-
-
-
-// const App = () => {
-//   // const now = new Date()
-//   // const a = 10
-//   // const b = 20
-//   // console.log(now, a + b)
-
-//   const friends = [
-//     { name: 'Peter', age: 4 },
-//     { name: 'Maya', age: 10 },
-//   ]
-
-//   return (
-//     <div>
-//       <p>{friends[0].name} {friends[0].age}</p>
-//       <p>{friends[1].name} {friends[1].age}</p>
-//     </div>
-//     // <div>
-//     //   <h1>Greetings</h1>
-//     //   <Hello name='Maya' age={26 + 10} />
-//     //   <Hello name={name} age={age} />
-//     //   <Footer />
-//     // </div>
-//     // <div>
-//     //   <p>Hello world, it is {now.toString()} </p>
-//     //   <p>
-//     //     {a} plus {b} is {a + b}
-//     //   </p>
-//     // </div>
-//   )
-// }
 
 export default App
