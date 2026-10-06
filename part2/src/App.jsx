@@ -1,10 +1,37 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import axios from 'axios'
 import Note from './components/Note.jsx'
 
-const App = (props) => {
-    const [notes, setNotes] = useState(props.notes)
+const App = () => {
+    const [notes, setNotes] = useState([])
     const [newNote, setNewNote] = useState('a new note...')
     const [showAll, setShowAll] = useState(true)
+
+    //get json database
+    const hook = () => {
+        console.log("effect")
+        //get json database
+        axios.get("http://localhost:3001/notes")
+            .then(response => {
+                console.log("promise fulfilled!")
+                const notes = response.data
+
+                setNotes(notes)
+            })
+    }
+    console.log('render', notes.length, 'notes')
+
+    useEffect(hook, []) // the [] is for how often the effect runs, or if its empty then it only renders once
+
+    // setTimeout(() => {
+    //     console.log('loop..')
+    //     let i = 0
+    //     while (i < 99999999999999) {
+    //         i++
+    //     }
+    //     console.log('end')
+    // }, 5000)
+
 
     const addNote = (event) => {
         event.preventDefault()
