@@ -4,6 +4,7 @@ import Note from './components/Note.jsx'
 const App = (props) => {
     const [notes, setNotes] = useState(props.notes)
     const [newNote, setNewNote] = useState('a new note...')
+    const [showAll, setShowAll] = useState(true)
 
     const addNote = (event) => {
         event.preventDefault()
@@ -26,13 +27,18 @@ const App = (props) => {
         setNewNote(event.target.value)
     }
 
+    const notesToShow = showAll ? notes : notes.filter(note => note.important === true)
+
     // an <li> needs a key
     // or, in this case, now the Note needs a key
     return (
         <div>
             <h1>Notes</h1>
+            <button onClick={() => setShowAll(!showAll)}>
+                show {showAll ? 'important' : 'all'}
+            </button>
             <ul>
-                {notes.map(note =>
+                {notesToShow.map(note =>
                     <Note key={note.id} note={note} />
                 )}
             </ul>
