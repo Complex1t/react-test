@@ -52,9 +52,16 @@ const App = () => {
         //create an exact copy of the old note, but flip the important value
         const changedNote = {...noteToChange, important: !noteToChange.important}
 
-        noteService.update(id, changedNote).then(returnedNote => {
+        noteService
+            .update(id, changedNote).then(returnedNote => {
             setNotes(notes.map(note => note.id === id ? returnedNote : note))
-        })
+            })
+            .catch(error => {
+                alert(
+                    `the note '${noteToChange.content}' was already deleted from server`
+                )
+                setNotes(notes.filter(n => n.id !== id)) //if its true, then keep it
+            })
 
     }
 

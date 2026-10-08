@@ -23,7 +23,7 @@
     {
       "id": "NQ3Frk1YtdE",
       "content": "test",
-      "important": true
+      "important": false
     },
     {
       "id": "cUI9-vrZ2nQ",
@@ -38,7 +38,7 @@
     {
       "id": "qArMWp3AAr4",
       "content": "hello",
-      "important": true
+      "important": false
     },
     {
       "id": "EvhQmdo8_TY",
