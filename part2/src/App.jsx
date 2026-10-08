@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
 import Note from './components/Note.jsx'
+import Footer from './components/Footer.jsx'
 import noteService from './services/notes'
 import Notification from './components/Notification.jsx'
 
@@ -97,6 +97,8 @@ const App = () => {
                 />
                 <button type="submit">save</button>
             </form>
+
+            <Footer />
         </div>
     )
 }
