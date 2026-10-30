@@ -1,7 +1,13 @@
 //import the built in web server module
 const express = require('express')
+const cors = require('cors')
+
 const app = express()
 app.use(express.json())
+app.use(cors())
+//this makes it so when express gets an HTTP GET request
+// it will first check the dist directory
+app.use(express.static('dist'))
 
 
 
@@ -94,7 +100,8 @@ app.post('/api/notes', (request, response) => {
 
 
 //bind the server to the app variable
-const PORT = 3001
+// we put process.env.PORT || 3001 to use with Render
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
