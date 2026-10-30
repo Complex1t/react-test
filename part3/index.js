@@ -1,10 +1,8 @@
 //import the built in web server module
 const express = require('express')
-const cors = require('cors')
 
 const app = express()
 app.use(express.json())
-app.use(cors())
 //this makes it so when express gets an HTTP GET request
 // it will first check the dist directory
 app.use(express.static('dist'))
